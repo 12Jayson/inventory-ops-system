@@ -1,0 +1,208 @@
+@use '../utils/variables' as *;
+
+// ---------------------------------------------------------
+// MIXINS PARA RESPONSIVIDAD
+// ---------------------------------------------------------
+@mixin mobile { @media (max-width: 768px) { @content; } }
+@mixin tablet { @media (max-width: 1024px) { @content; } }
+
+// ---------------------------------------------------------
+// ESTRUCTURA PRINCIPAL
+// ---------------------------------------------------------
+.dashboard-wrapper {
+    display: flex;
+    min-height: 100vh;
+    background-color: $bg-body;
+    overflow-x: hidden; // Evita scroll horizontal accidental
+}
+
+.main-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin-left: $sidebar-width; 
+    min-width: 0;
+    transition: margin 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    @include mobile {
+        margin-left: 0; // El sidebar usualmente se oculta en móvil
+    }
+}
+
+// ---------------------------------------------------------
+// CONTENIDO Y HEADERS
+// ---------------------------------------------------------
+.dashboard-content {
+    flex: 1;
+    padding: 2rem;
+    max-width: 1600px;
+    width: 100%;
+    margin: 0 auto;
+
+    @include mobile { padding: 1.5rem 1rem; }
+
+    .content-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 2.5rem;
+        gap: 1.5rem;
+
+        @include mobile { flex-direction: column; align-items: flex-start; }
+
+        .header-title {
+            h1 { 
+                margin: 0; 
+                color: $primary; 
+                font-size: clamp(1.5rem, 4vw, 1.8rem); // Tamaño fluido
+                font-weight: 800;
+                letter-spacing: -0.5px;
+            }
+            .welcome-msg { 
+                color: $text-muted; 
+                margin-top: 4px;
+                font-size: 0.95rem;
+            }
+        }
+
+        .header-status {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+
+            .role-badge {
+                background-color: $primary;
+                color: $white;
+                padding: 0.4rem 0.8rem;
+                border-radius: 6px;
+                font-weight: 700;
+                font-size: 0.7rem;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+            }
+        }
+    }
+}
+
+// ---------------------------------------------------------
+// GRID DE ESTADÍSTICAS
+// ---------------------------------------------------------
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+
+    .stat-card {
+        background: $white;
+        padding: 1.5rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        border-left: 5px solid transparent; // Cambiado a borde izquierdo para mayor elegancia
+        transition: all 0.3s ease;
+
+        &:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 20px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        h4 {
+            color: $text-muted;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            margin: 0 0 12px 0;
+            letter-spacing: 0.8px;
+        }
+
+        .number {
+            display: block;
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: $primary;
+            margin-bottom: 0.8rem;
+            line-height: 1;
+        }
+
+        .stat-link {
+            font-size: 0.8rem;
+            color: $accent;
+            text-decoration: none;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+
+            &::after { content: '→'; transition: transform 0.2s; }
+            &:hover::after { transform: translateX(3px); }
+        }
+
+        // Colores temáticos
+        &.products { border-left-color: #3b82f6; }
+        &.vendors  { border-left-color: #f59e0b; }
+        &.users    { border-left-color: #8b5cf6; }
+        &.orders   { border-left-color: $accent; }
+    }
+}
+
+// ---------------------------------------------------------
+// FORMULARIOS DE FILTRADO (Reportes)
+// ---------------------------------------------------------
+.filter-form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)) auto;
+    gap: 1.25rem;
+    align-items: flex-end;
+
+    @include tablet { grid-template-columns: 1fr; }
+
+    .form-control {
+        width: 100%;
+        padding: 0.7rem 1rem;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        background-color: #f8fafc;
+        font-family: inherit;
+        transition: all 0.2s ease;
+        
+        &:focus {
+            outline: none;
+            background-color: $white;
+            border-color: $accent;
+            box-shadow: 0 0 0 4px rgba($accent, 0.15);
+        }
+    }
+}
+
+// ---------------------------------------------------------
+// ELEMENTOS COMUNES (Fechas e Iconos)
+// ---------------------------------------------------------
+.date-display {
+    background: $white;
+    padding: 0.7rem 1.2rem;
+    border-radius: 30px; // Estilo cápsula
+    border: 1px solid rgba($primary, 0.05);
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    
+    p {
+        margin: 0;
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: $primary;
+        i { margin-right: 10px; color: $accent; font-size: 1rem; }
+    }
+}
+
+.main-footer {
+    padding: 1.5rem;
+    margin-top: auto; // Empuja el footer al final
+    background: $white;
+    border-top: 1px solid #f1f5f9;
+    color: $text-muted;
+    font-size: 0.8rem;
+    text-align: center;
+}

@@ -1,0 +1,227 @@
+@use '../utils/variables' as *;
+
+// Definición de la animación Fade-In
+@keyframes fadeInStore {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.sidebar {
+    // Dimensiones y Posicionamiento Fijo
+    width: $sidebar-width;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    
+    background-color: $primary;
+    color: $white;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    // Scrollbar personalizado
+    &::-webkit-scrollbar { width: 5px; }
+    &::-webkit-scrollbar-thumb {
+        background: rgba($secondary, 0.2);
+        border-radius: 10px;
+    }
+
+    .sidebar-logo {
+        padding: 2rem 1.5rem;
+        border-bottom: 1px solid rgba($secondary, 0.3);
+        flex-shrink: 0;
+        
+        h2 { 
+            font-size: 1.25rem; 
+            margin: 0; 
+            color: $secondary;
+            white-space: nowrap;
+        }
+    }
+
+    // --- BLOQUE DE TIENDA CON FADE-IN ---
+    .active-store-panel {
+        background: rgba($white, 0.05);
+        margin: 1.2rem 1rem;
+        padding: 1rem;
+        border-radius: 8px;
+        border-left: 4px solid $accent;
+        flex-shrink: 0;
+        
+        // Animación de entrada
+        animation: fadeInStore 0.6s ease-out forwards;
+
+        .store-info {
+            margin-bottom: 0.8rem;
+
+            .store-label {
+                display: block;
+                font-size: 0.65rem;
+                color: rgba($white, 0.5);
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                margin-bottom: 0.2rem;
+            }
+
+            .store-name {
+                font-weight: 600;
+                font-size: 0.9rem;
+                color: $white;
+                line-height: 1.3;
+                display: block;
+            }
+        }
+
+        .btn-switch-store {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: rgba($white, 0.1);
+            color: $white;
+            text-decoration: none;
+            font-size: 0.75rem;
+            padding: 0.6rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba($white, 0.05);
+
+            &:hover {
+                background-color: $accent;
+                color: $white;
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(black, 0.3);
+            }
+
+            i { font-size: 0.8rem; }
+        }
+    }
+
+    .sidebar-nav {
+        padding: 0.5rem 0;
+        flex: 1;
+
+        // Estilos para los li que usas en el nav
+        .nav-item {
+            list-style: none;
+            width: 100%;
+        }
+
+        .nav-group {
+            margin-bottom: 0.5rem;
+
+            .group-title {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 0.8rem 1.5rem;
+                font-size: 0.75rem;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                color: rgba($white, 0.6);
+                cursor: pointer;
+                transition: all 0.3s ease;
+                
+                &:hover { 
+                    background-color: rgba($white, 0.05); 
+                    color: $white;
+                }
+
+                .arrow {
+                    font-size: 0.7rem;
+                    transition: transform 0.3s ease;
+                }
+            }
+
+            .dropdown-content {
+                max-height: 0;
+                overflow: hidden;
+                background-color: rgba(black, 0.15);
+                transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+
+            &.active {
+                .group-title {
+                    color: $secondary;
+                    .arrow { transform: rotate(180deg); }
+                }
+                .dropdown-content { max-height: 500px; }
+            }
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0.8rem 1.5rem;
+            color: rgba($white, 0.8);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            border-left: 4px solid transparent;
+
+            i { width: 20px; text-align: center; }
+
+            &:hover {
+                background-color: rgba($secondary, 0.15);
+                color: $white;
+                padding-left: 1.8rem;
+            }
+
+            &.active {
+                background-color: rgba($secondary, 0.2);
+                border-left-color: $accent;
+                color: $white;
+                font-weight: 500;
+            }
+            
+            // Estilo específico para el Switch Store cuando es un nav-link (fallback)
+            &.change-store-link {
+                color: $accent;
+                &:hover { background-color: rgba($accent, 0.1); }
+            }
+        }
+
+        // Estilo para enlaces dentro de dropdowns
+        .dropdown-content .nav-link {
+            padding-left: 2.8rem;
+            font-size: 0.85rem;
+            border-left: none;
+            
+            &:hover { padding-left: 3.2rem; }
+            &.active { color: $secondary; }
+        }
+    }
+
+    .sidebar-footer {
+        padding: 1.5rem;
+        border-top: 1px solid rgba($white, 0.1);
+        flex-shrink: 0;
+
+        .logout-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: $accent;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            padding: 0.6rem;
+            border-radius: 6px;
+
+            &:hover {
+                background-color: rgba($accent, 0.1);
+                transform: translateX(5px);
+            }
+        }
+    }
+}

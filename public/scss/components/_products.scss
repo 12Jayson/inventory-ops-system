@@ -1,0 +1,133 @@
+.vendor-tag {
+    background: #f0f2f5;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    color: #495057;
+    i {
+        margin-right: 5px;
+        color: #1d3557;
+    }
+}
+
+.table-container {
+    margin-top: 20px;
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+}
+
+// Estilos para el flujo de selección de productos en Place Order
+.order-selection-container {
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    gap: 25px;
+    align-items: start;
+
+    @media (max-width: 992px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+// Panel de búsqueda (Izquierda)
+.search-panel {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    
+    .search-input-wrapper {
+        position: relative;
+        margin-bottom: 15px;
+
+        i {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #a0aec0;
+        }
+
+        input {
+            padding-left: 35px;
+            border-radius: 20px;
+            border: 1px solid #edf2f7;
+            width: 100%;
+            height: 40px;
+            transition: border-color 0.2s;
+
+            &:focus {
+                outline: none;
+                border-color: #3182ce;
+            }
+        }
+    }
+}
+
+// Lista de resultados (Cards)
+.product-search-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 450px;
+    overflow-y: auto;
+
+    .product-card-item {
+        background: #fff;
+        border: 1px solid #edf2f7;
+        border-radius: 8px;
+        padding: 12px 15px;
+        margin-bottom: 10px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        &:hover {
+            border-color: #3182ce;
+            background: #f7fafc;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+
+            .add-icon {
+                opacity: 1;
+                transform: scale(1.1);
+            }
+        }
+
+        .info {
+            h4 {
+                margin: 0;
+                font-size: 0.95rem;
+                color: #2d3748;
+                font-weight: 600;
+            }
+            span {
+                font-size: 0.75rem;
+                color: #718096;
+            }
+        }
+
+        .add-icon {
+            color: #3182ce;
+            opacity: 0;
+            font-size: 1.2rem;
+            transition: all 0.2s;
+        }
+    }
+}
+
+// Estado vacío y tabla
+.no-items-placeholder {
+    text-align: center;
+    padding: 40px;
+    color: #a0aec0;
+
+    i {
+        font-size: 2.5rem;
+        display: block;
+        margin-bottom: 15px;
+        opacity: 0.5;
+    }
+}

@@ -1,0 +1,116 @@
+@use '../utils/variables' as *;
+
+// 1. Contenedor Principal: Aire lateral pero más compacto arriba
+.dashboard-content {
+    padding: 2rem 4rem; 
+    background-color: $bg-body;
+    min-height: 100vh;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+// 2. Sección de Alertas (Compactada)
+.purchase-alerts {
+    margin-bottom: 2.5rem; // SEPARACIÓN: Margen inferior para despegarse de las stats
+
+    .details-card {
+        padding: 1.2rem 2rem; // TAMAÑO: Reducido para que no sea tan alto
+        background: $white;
+        border-radius: 16px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+        border: 1px solid rgba(0,0,0,0.02);
+
+        .order-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.8rem; // Espacio mínimo
+
+            h3 {
+                font-size: 1rem; // Un poco más pequeño
+                color: $primary;
+                margin: 0;
+                i { color: $accent; margin-right: 8px; }
+            }
+
+            .badge.info {
+                font-size: 0.75rem;
+                padding: 0.3rem 0.8rem;
+            }
+        }
+
+        // Estado vacío: Mucho más discreto
+        .empty-state {
+            padding: 1rem 0; // Compacto
+            text-align: center;
+            border: 1px dashed #f1f5f9;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+
+            i {
+                font-size: 1.4rem; // Icono pequeño
+                color: #cbd5e1;
+                margin: 0;
+            }
+
+            p {
+                font-size: 0.9rem;
+                color: $text-muted;
+                margin: 0;
+            }
+        }
+    }
+}
+
+// 3. Grid de Estadísticas (Consistente)
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3.5rem; // Espacio antes de Quick Actions
+
+    .stat-card {
+        padding: 1.5rem; // Más apretado para que quepa todo en un vistazo
+        background: $white;
+        border-radius: 16px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.04);
+        transition: transform 0.3s ease;
+
+        &:hover { transform: translateY(-5px); }
+
+        .number {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: $primary;
+            margin-bottom: 8px;
+            line-height: 1;
+        }
+
+        h4 {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: $text-muted;
+            margin-bottom: 12px;
+        }
+    }
+}
+
+// 4. Quick Actions
+.quick-actions-section {
+    .section-subtitle {
+        font-size: 1.1rem;
+        font-weight: 700;
+        margin-bottom: 1.2rem;
+        color: $primary;
+    }
+
+    .form-actions {
+        display: flex;
+        gap: 1rem;
+        padding: 0;
+        border: none;
+    }
+}

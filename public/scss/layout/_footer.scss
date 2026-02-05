@@ -1,0 +1,52 @@
+@use '../utils/variables' as *;
+
+.main-footer {
+    background-color: $white;
+    padding: 1.5rem 2rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    margin-top: auto; // Empuja el footer al fondo si usas flexbox en el contenedor padre
+
+    .footer-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: $text-muted;
+        font-size: 0.85rem;
+    }
+
+    .footer-left {
+        strong {
+            color: $primary;
+        }
+    }
+
+    .footer-right {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: $secondary;
+            font-weight: 600;
+
+            .dot {
+                width: 8px;
+                height: 8px;
+                background-color: $secondary;
+                border-radius: 50%;
+                display: inline-block;
+                box-shadow: 0 0 8px rgba($secondary, 0.5);
+                animation: pulse 2s infinite;
+            }
+        }
+    }
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.4; }
+    100% { opacity: 1; }
+}

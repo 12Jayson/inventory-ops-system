@@ -1,0 +1,18 @@
+.stat-card.orders {
+    border-left: 5px solid #8e44ad; // Un color púrpura elegante
+    
+    h4 {
+        color: #8e44ad;
+    }
+    
+    .number {
+        color: #2c3e50;
+    }
+
+    a {
+        color: #8e44ad;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}

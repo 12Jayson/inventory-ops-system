@@ -1,0 +1,9 @@
+# Configuración sensible
+app/config/config.php
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+
+# Logs
+error_log

@@ -1,0 +1,24 @@
+@use '../utils/variables' as *;
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+}
+
+.stat-card {
+    background: $white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    transition: transform 0.2s;
+
+    &:hover { transform: translateY(-5px); }
+
+    h4 { color: $text-muted; margin: 0; font-size: 0.9rem; }
+    .number { font-size: 2.2rem; font-weight: 700; margin: 10px 0; color: $primary; }
+    
+    // Borders based on classes we added in the PHP
+    &.products { border-left: 5px solid $secondary; }
+    &.vendors { border-left: 5px solid #e9c46a; }
+    &.users { border-left: 5px solid $accent; }
+}

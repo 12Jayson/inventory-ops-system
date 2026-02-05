@@ -1,0 +1,17 @@
+{
+  "name": "shahs-inventory-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+"scripts": {
+    "sass-build": "sass public/scss/main.scss public/css/main.css",
+    "sass-watch": "sass public/scss/main.scss public/css/main.css --watch",
+    "dev": "npm run sass-watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "sass": "^1.97.3"
+  }
+}

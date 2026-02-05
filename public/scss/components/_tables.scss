@@ -1,0 +1,35 @@
+.styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+
+    th, td {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid #eee;
+    }
+
+    th {
+        background-color: #f8f9fa;
+        color: #1d3557;
+        font-weight: 600;
+    }
+
+    .badge {
+        padding: 4px 10px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: bold;
+        &.admin { background: #e3f2fd; color: #1976d2; }
+        &.user { background: #e8f5e9; color: #2e7d32; }
+    }
+
+    .stores-list {
+        font-size: 0.85rem;
+        color: #555;
+        max-width: 300px;
+    }
+}

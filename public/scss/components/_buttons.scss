@@ -1,0 +1,261 @@
+@use '../utils/variables' as *;
+
+// ---------------------------------------------------------
+// 1. MIXINS & ANIMACIONES
+// ---------------------------------------------------------
+@mixin flex-center {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+// ---------------------------------------------------------
+// 2. BOTÓN BASE (Clase Maestra)
+// ---------------------------------------------------------
+.btn {
+    @include flex-center;
+    gap: 8px;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-decoration: none;
+    font-family: inherit;
+    white-space: nowrap;
+
+    i { font-size: 1rem; }
+
+    &:active { transform: scale(0.96); }
+
+    &:disabled, &.disabled {
+        background-color: #d1d5db !important;
+        color: #9ca3af !important;
+        cursor: not-allowed;
+        pointer-events: none;
+        box-shadow: none !important;
+    }
+}
+
+// ---------------------------------------------------------
+// 3. VARIANTES DE COLOR
+// ---------------------------------------------------------
+.btn-primary {
+    @extend .btn;
+    background-color: $accent;
+    color: $white;
+
+    &:hover {
+        background-color: darken($accent, 8%);
+        box-shadow: 0 4px 12px rgba($accent, 0.35);
+        transform: translateY(-1px);
+    }
+}
+
+.btn-secondary {
+    @extend .btn;
+    background-color: $secondary;
+    color: $primary;
+
+    &:hover {
+        background-color: darken($secondary, 5%);
+        transform: translateY(-1px);
+    }
+}
+
+.btn-outline {
+    @extend .btn;
+    background: transparent;
+    border: 2px solid $accent;
+    color: $accent;
+
+    &:hover {
+        background-color: $accent;
+        color: $white;
+    }
+    
+    &.btn-sm { border-width: 1px; }
+}
+
+.btn-completed {
+    @extend .btn;
+    background-color: #27ae60;
+    color: $white;
+    cursor: default;
+    pointer-events: none; // No interactivo si ya terminó
+}
+
+// Botón específico para el panel de tienda en Sidebar
+.btn-switch-store {
+    @extend .btn;
+    background: rgba($white, 0.08);
+    color: $white;
+    padding: 0.6rem;
+    font-size: 0.75rem;
+    border: 1px solid rgba($white, 0.1);
+    width: 100%;
+
+    &:hover {
+        background-color: $accent;
+        border-color: $accent;
+        box-shadow: 0 4px 10px rgba(black, 0.2);
+    }
+}
+
+// Botones de iconos circulares o cuadrados pequeños
+.btn-icon {
+    @include flex-center;
+    width: 36px;
+    height: 36px;
+    border-radius: 6px;
+    background-color: rgba($secondary, 0.15);
+    color: $primary;
+    transition: all 0.2s ease;
+    border: none;
+    cursor: pointer;
+
+    &:hover {
+        background-color: $accent;
+        color: $white;
+        transform: translateY(-2px);
+    }
+    
+    &.btn-remove {
+        color: $accent;
+        background: transparent;
+        &:hover { 
+            background: rgba($accent, 0.1); 
+            transform: scale(1.1);
+        }
+    }
+}
+
+// ---------------------------------------------------------
+// 4. MODIFICADORES DE TAMAÑO
+// ---------------------------------------------------------
+.btn-sm { padding: 0.4rem 0.8rem; font-size: 0.8rem; }
+.btn-lg { padding: 1rem 2rem; font-size: 1.1rem; }
+
+// ---------------------------------------------------------
+// 5. COMPONENTES DE LAYOUT (Cards & Details)
+// ---------------------------------------------------------
+.details-card, .order-card {
+    background: $white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-top: 1.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.order-meta-grid {
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+    gap: 1.5rem; 
+    border-bottom: 1px solid rgba($primary, 0.05); 
+    padding-bottom: 1.5rem; 
+    margin-bottom: 1.5rem;
+
+    .meta-item {
+        label {
+            display: block;
+            color: #64748b;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            margin-bottom: 4px;
+        }
+        strong {
+            font-size: 1.05rem;
+            color: $primary;
+        }
+    }
+}
+
+.order-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    h3 { font-size: 1.1rem; font-weight: 700; color: $primary; }
+}
+
+// Estilos de productos en tablas
+.selected-product-info {
+    .product-name {
+        display: block;
+        font-weight: 600;
+        color: $primary;
+        margin-bottom: 2px;
+    }
+    .product-code {
+        display: block;
+        font-size: 0.75rem;
+        color: #94a3b8;
+    }
+}
+
+.qty-display {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: $primary;
+}
+
+.form-actions {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #f1f5f9;
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+// Estilos para la cuadrícula de tareas (Admin Dashboard)
+.task-grid {
+    display: grid; 
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+    gap: 20px;
+}
+
+.task-card {
+    background: #f8fafc; 
+    border: 1px solid #e2e8f0; 
+    padding: 15px; 
+    border-radius: 12px; 
+    position: relative; 
+    overflow: hidden;
+    transition: transform 0.2s ease;
+
+    &:hover { transform: translateY(-3px); }
+
+    .task-accent {
+        position: absolute; 
+        top: 0; left: 0; width: 4px; height: 100%; 
+        background: $accent; 
+    }
+
+    h4 { margin: 0 0 5px 0; color: $primary; }
+    
+    .task-meta { margin: 0; font-size: 0.85rem; color: #64748b; }
+    
+    .task-note {
+        margin-top: 8px; 
+        font-size: 0.8rem; 
+        color: #475569; 
+        font-style: italic;
+    }
+}
+
+// Estilos para enlaces de estadísticas
+.stat-link {
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    color: inherit;
+    opacity: 0.8;
+    &:hover { opacity: 1; text-decoration: underline; }
+}
+
+.text-accent { color: $accent; }

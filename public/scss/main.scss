@@ -1,0 +1,45 @@
+// 1. UTILS (Variables y Mixins primero)
+@use 'utils/variables' as *;
+@use 'utils/mixins' as *;
+
+// 2. BASE
+@use 'base/reset';
+@use 'base/typography';
+
+// 3. LAYOUT
+@use 'layout/header';
+@use 'layout/sidebar';
+@use 'layout/dashboard';
+@use 'layout/footer';
+@use 'layout/order_dashboard';
+
+// 4. COMPONENTS
+@use 'components/buttons';
+@use 'components/cards';
+@use 'components/forms';
+@use 'components/success';
+@use 'components/tables';
+@use 'components/products';
+@use 'components/filters';
+
+// --- ESTILOS GENERALES Y AJUSTE DE ESTRUCTURA ---
+
+body {
+    background-color: $bg-body;
+    color: $text-main;
+}
+
+// Ajuste para el Sidebar Fixed
+// Esto empuja todo el contenido a la derecha según el ancho definido en variables
+.main-wrapper {
+    margin-left: $sidebar-width;
+    width: calc(100% - #{$sidebar-width});
+    min-height: 100vh;
+    transition: all 0.3s ease;
+    
+    // Si el sidebar es para móviles en el futuro, podrías ajustar esto con un media query
+    @media (max-width: 768px) {
+        margin-left: 0;
+        width: 100%;
+    }
+}
